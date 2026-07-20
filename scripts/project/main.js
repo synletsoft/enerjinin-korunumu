@@ -20,12 +20,12 @@ const PLANETS = [
 ];
 
 const METRIC_POSITIONS = {
-	speed: { x: 156.5, y: 79, w: 235 },
-	height: { x: 374, y: 79, w: 235 },
-	ke: { x: 589, y: 79, w: 235 },
-	pe: { x: 828, y: 79, w: 280 },
-	heat: { x: 1068, y: 79, w: 235 },
-	total: { x: 1285, y: 79, w: 235 }
+	speed: { x: 156.5, y: 62, w: 235 },
+	height: { x: 374, y: 62, w: 235 },
+	ke: { x: 589, y: 62, w: 235 },
+	pe: { x: 828, y: 62, w: 280 },
+	heat: { x: 1068, y: 62, w: 235 },
+	total: { x: 1285, y: 62, w: 235 }
 };
 
 const PLANET_BUTTONS = [
@@ -523,8 +523,8 @@ function updateSliderHandles(state)
 
 function setSliderHandle(slider, ratio)
 {
-	const trackHeight = 435;
-	const top = (1 - ratio) * trackHeight;
+	const trackHeight = slider.offsetHeight || 370;
+	const top = (1 - Math.max(0, Math.min(1, ratio))) * trackHeight;
 	slider.querySelector(".slider-handle").style.top = `${top}px`;
 }
 
@@ -828,13 +828,16 @@ function injectEnergyStyles()
 
 		.metric-value {
 			position: absolute;
-			height: 40px;
+			height: 48px;
 			text-align: center;
 			font-size: 38px;
 			font-weight: 900;
-			line-height: 40px;
+			line-height: 1;
 			letter-spacing: 0;
 			white-space: nowrap;
+			display: flex;
+			align-items: center;
+			justify-content: center;
 			pointer-events: none;
 		}
 
@@ -924,7 +927,7 @@ function injectEnergyStyles()
 		.construct-run-buttons {
 			position: absolute;
 			left: 1692px;
-			top: 202px;
+			top: 238px;
 			width: 210px;
 			display: grid;
 			gap: 10px;
@@ -981,15 +984,15 @@ function injectEnergyStyles()
 
 		.slider-readout {
 			position: absolute;
-			top: 386px;
-			min-width: 82px;
-			height: 40px;
-			padding: 0 9px;
+			top: 410px;
+			width: 94px;
+			height: 54px;
+			padding: 0;
 			border-radius: 7px;
 			background: #e6f3ff;
 			display: grid;
 			place-items: center;
-			font-size: 25px;
+			font-size: 24px;
 			font-weight: 900;
 			white-space: nowrap;
 			pointer-events: none;
@@ -1005,9 +1008,9 @@ function injectEnergyStyles()
 
 		.slider-control {
 			position: absolute;
-			top: 443px;
+			top: 514px;
 			width: 76px;
-			height: 435px;
+			height: 370px;
 			pointer-events: auto;
 		}
 
@@ -1021,9 +1024,9 @@ function injectEnergyStyles()
 
 		.slider-control input {
 			position: absolute;
-			left: -180px;
-			top: 199px;
-			width: 435px;
+			left: -147px;
+			top: 166px;
+			width: 370px;
 			height: 38px;
 			transform: rotate(-90deg);
 			opacity: 0;
